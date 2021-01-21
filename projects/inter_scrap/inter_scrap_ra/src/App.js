@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 
 // https://127.0.0.1:8000/
-const API = 'scrap/';
+const API = '/scrap/';
 
 
 class App extends React.Component {
@@ -97,19 +97,19 @@ fetch(url)
 */
   handleSubmit(e){
     e.preventDefault()
-    let keyword = (this.state.search_string).replace("%20", "")
-    var csrftoken = this.getCookie('scrftoken')
-    let url = API + keyword
-    console.log('ITEM', (this.state.search_string).replace("%20", ""))
+    let keyword = this.state.search_string
+    // var csrftoken = this.getCookie('csrftoken')
+    let url = API + keyword.replace(" ", "")
+    console.log('ITEM', keyword.replace("%20", ""))
     fetch(url)
     .then(response => response.json())
     .then(data =>
       this.setState({
-        itemReviews:data
+        itemReviews:data,
+        search_string:''
       })
     ).catch(function(error){
       console.log('ERROR:', error)
-
     })
   }
 
@@ -118,13 +118,13 @@ fetch(url)
       return (
         <div className="container">
           <form onSubmit={this.handleSubmit} className="form-wrapper">
-          <input onChange={this.handleChange} className="form-control" type="text" placeholder="Search a product" name="search_string"/>
+          <input onChange={this.handleChange} className="form-control" value={this.state.search_string} type="text" placeholder="Search a product" name="search_string"/>
           <input className="btn btn-primary center-item" type="submit" placeholder="Search"/>
           </form>
 
           <div className="review-wrapper flex-wrapper"><span style={{flex: 1}}>Product</span>
             <span style={{flex: 1}}>Customer</span><span style={{flex: 1}}>Rating</span>
-            <span style={{flex: 1}}>heading</span><span style={{flex: 1}}>Comment</span></div>
+            <span style={{flex: 1}}>heading</span><span style={{flex: 2}}>Comment</span></div>
 
           <div className="review-wrapper">
             {reviews.map(function(review, index){
@@ -142,7 +142,7 @@ fetch(url)
                         <div style={{flex: 1}}>
                             <span>{review.heading}</span>
                         </div>
-                        <div style={{flex: 1}}>
+                        <div style={{flex: 2}}>
                             <span>{review.comment}</span>
                         </div>
                     </div>

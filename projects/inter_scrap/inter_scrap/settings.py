@@ -10,7 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
+import django_heroku
 from pathlib import Path
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,13 +22,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '6ybe!nylq*io#sb!wa6*q#+y1vjgl-it!-8r^7@rvq0)3p_4h3'
+SECRET_KEY = 'securitykeyhere'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", "localhost", "reviewxscrap.herokuapp.com"]
 
+# CORS_REPLACE_HTTPS_REFERER = False
+# HOST_SCHEME = "http://"
+SECURE_PROXY_SSL_HEADER = None
+SECURE_SSL_REDIRECT = False
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
+SECURE_HSTS_SECONDS = None
+SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+SECURE_FRAME_DENY = False
 
 # Application definition
 
@@ -129,8 +140,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
+django_heroku.settings(locals())
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'inter_scrap_ra/build/static'),
 ]
@@ -140,22 +153,4 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "http://localhost:8000",
     "http://127.0.0.1:8000",
-]
-
-CORS_ALLOW_METHODS = [
-    'GET',
-    'OPTIONS',
-    'POST',
-]
-
-CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
 ]

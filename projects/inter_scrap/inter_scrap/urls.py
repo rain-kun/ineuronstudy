@@ -22,5 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='index.html')),
     path('api/', include("scrapapi.urls")),
-    path('', include("scrapbox.urls")),
+    path('scrap/', include("scrapbox.urls")),
 ]

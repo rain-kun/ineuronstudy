@@ -1,6 +1,8 @@
 {
   "name": "inter_scrap_ra",
   "version": "0.1.0",
+  "author": "Ashutosh-Yadav",
+  "description": "A flipkart scrapping website.",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
@@ -34,5 +36,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "engines": {
+    "node": "12.x"
+  },
 }

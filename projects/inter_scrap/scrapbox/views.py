@@ -14,8 +14,11 @@ from . serializers import ReviewSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+"""
+THE FOLLOWING PROGRAME CODE BELONGS TO ASHUTOSH VISHU YADAV UNDER GNU General Public License v3.0
+view for scrapping the reviews  | BASED ON INEURON ML COURSE
+"""
 
-# view for scrapping the reviews  | BASED ON INEURON ML COURSE
 # @csrf_exempt
 @api_view(['GET', ])
 def scrap(request, search_string):
@@ -46,7 +49,7 @@ def scrap(request, search_string):
             flipkart_html = bs(flip_kart_page, "html.parser")
             big_boxes = flipkart_html.findAll("div", {"class": "_2pi5LC col-12-12"})
             del big_boxes[0:3]
-            box = big_boxes[0]
+            box = big_boxes[2]
             product_link = "https://www.flipkart.com" + box.div.div.div.a['href']
             prod_res = uReq(product_link)
             product_page = prod_res.read()
