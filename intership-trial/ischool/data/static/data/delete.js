@@ -18,7 +18,7 @@ function getCookie(name) {
 function deleteItem(id) {
     let url = document.querySelector('#delete-url').value + id;
     let csrftoken = getCookie('csrftoken');
-    console.log(url);
+    //console.log(url);
     //console.log(extra);
     fetch(url, {
         method: 'DELETE',
