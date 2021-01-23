@@ -58,11 +58,32 @@ function search() {
             div.appendChild(a);
             div.appendChild(button);
             con.appendChild(div);
-            console.log("course")
         }
         }
         else if(extra.slice(1,9) == "division"){
-        console.log("division")
+        for (let i = 0; i < data.length; i++) {
+            const div = document.createElement('div');
+            const a = document.createElement('a');
+            const s1 = document.createElement('span');
+            const s2 = document.createElement('span');
+            const s3 = document.createElement('span');
+            const button = document.createElement('button');
+            div.className = "bg-light flex";
+            a.className = "text-dark";
+            a.href = `/division/${data[i].id}`;
+            s1.innerText = `${data[i].name} `;
+            s2.innerText = `${data[i].surname} `;
+            s3.innerText = `${data[i].grade}`;
+            button.className = "btn btn-danger flex-right";
+            button.onClick = "return search()";
+            button.innerText = "Delete";
+            a.appendChild(s1);
+            a.appendChild(s2);
+            a.appendChild(s3);
+            div.appendChild(a);
+            div.appendChild(button);
+            con.appendChild(div);
+        }
         }
 
       }).catch(error =>{
